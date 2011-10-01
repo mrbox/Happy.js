@@ -18,9 +18,12 @@
       if (errors) {
         if (isFunction(config.unHappy)) config.unHappy();
         return false;
-      } else if (config.testMode) {
-        if (window.console) console.warn('would have submitted');
-        return false;
+      } else {
+        if (config.testMode && window.console) {
+          console.warn('would have submitted');
+          return false;
+        }
+        if (isFunction(config.Happy)) return config.Happy();
       }
     }
     function isFunction (obj) {
