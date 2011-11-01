@@ -44,7 +44,7 @@
     function processField(opts, selector) {
       var field = $(selector),
         error = {
-          message: opts.message,
+          message: opts.message || '',
           id: selector.slice(1) + '_unhappy'
         };
         var errorEl = $(error.id).length > 0 ? $(error.id) : getError(error);
