@@ -8,6 +8,8 @@
     <script>
       $(document).ready(function () {
         $('#awesomeForm').isHappy({
+          testMode: true,
+          submitButton: $('input#go'),
           fields: {
             // reference the field you're talking about, probably by `id`
             // but you could certainly do $('[name=name]') as well.
@@ -18,7 +20,16 @@
             '#email': {
               required: true,
               message: 'How are we to reach you sans email??',
-              test: happy.email // this can be *any* function that returns true or false
+              test: happy.email, // this can be *any* function that returns true or false
+              tests: [{
+                  test: happy.minLength,
+                  arg: 10,
+                  message: 'Name can\'t be shorter than 10 characters'
+              },{
+                  test: happy.maxLength,
+                  arg: 20,
+                  message: 'Name can\'t be longer than 20 characters'
+              }]
             }
           }
         });
@@ -40,7 +51,7 @@
     <form id="awesomeForm" action="/lights/camera" method="post">
       <input id="yourName" type="text" name="name" />
       <input id="email" type="text" name="email" class="" />
-      <input type="submit" value="go" />
+      <input type="submit" value="go" id="go" />
     </form>
   </body>
 </html>
